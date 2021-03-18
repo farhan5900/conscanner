@@ -30,4 +30,4 @@ To get the `CVE` reports:
 ./conscanner report /path/to/images.json
 ```
 
-This command will generate reports for each image and store it in a directory named `conscanner`.
+This command will generate reports for each image and store it in a directory named `conscanner-reports`.
