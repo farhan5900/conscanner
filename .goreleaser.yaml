@@ -34,23 +34,6 @@ dockers:
     image_templates:
       - "farhan5900/conscanner:latest"
     skip_push: auto
-  # always push a docker image on release for the .Tag version
-  - dockerfile: Dockerfile
-    ids:
-      - conscanner
-    goos: linux
-    goarch: arm64
-    image_templates:
-      - "farhan5900/conscanner-arm64:{{ .Tag }}"
-  # only update the docker :latest for a full release (not RC)
-  - dockerfile: Dockerfile
-    ids:
-      - conscanner
-    goos: linux
-    goarch: arm64
-    image_templates:
-      - "farhan5900/conscanner-arm64:latest"
-    skip_push: auto
 
 checksum:
   name_template: "checksums.txt"
