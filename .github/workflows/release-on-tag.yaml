@@ -14,7 +14,7 @@ jobs:
          curl -LO https://github.com/goreleaser/goreleaser/releases/download/v0.164.0/goreleaser_Linux_x86_64.tar.gz
      - name: Extract GoReleaser Binary
        run: |
-         mkdir -p /opt/goreleaser && tar -xzf --directory /opt/goreleaser goreleaser_Linux_x86_64.tar.gz && rm -rf goreleaser_Linux_x86_64.tar.gz
+          mkdir -p goreleaser && tar -xzf goreleaser_Linux_x86_64.tar.gz --directory ./goreleaser
      - name: Run the Release
        run: |
-         /opt/goreleaser/goreleaser --rm-dist
+         ./goreleaser/goreleaser --rm-dist
