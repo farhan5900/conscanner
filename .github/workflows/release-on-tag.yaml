@@ -9,14 +9,11 @@ jobs:
     steps:
      - name: Checkout Code
        uses: actions/checkout@v1
-     - name: Download GoReleaser
+     - name: Download and Extract GoReleaser
        run: |
-         curl -LO https://github.com/goreleaser/goreleaser/releases/download/v0.164.0/goreleaser_Linux_x86_64.tar.gz
-     - name: Extract GoReleaser Binary
-       run: |
-          mkdir -p goreleaser && tar -xzf goreleaser_Linux_x86_64.tar.gz --directory ./goreleaser
+         curl -Ls https://github.com/goreleaser/goreleaser/releases/download/v0.164.0/goreleaser_Linux_x86_64.tar.gz | tar -xzf - -C /tmp
      - name: Run the Release
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        run: |
-         ./goreleaser/goreleaser --rm-dist
+         /tmp/goreleaser --rm-dist
