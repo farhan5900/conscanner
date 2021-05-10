@@ -27,7 +27,7 @@ builds:
 dockers:
   # always push a docker image on release for the .Tag version
   - dockerfile: Dockerfile
-    binaries:
+    ids:
       - conscanner
     goos: linux
     goarch: amd64
@@ -35,7 +35,7 @@ dockers:
       - "farhan5900/conscanner:{{ .Tag }}"
   # only update the docker :latest for a full release (not RC)
   - dockerfile: Dockerfile
-    binaries:
+    ids:
       - conscanner
     goos: linux
     goarch: amd64
@@ -44,7 +44,7 @@ dockers:
     skip_push: auto
   # always push a docker image on release for the .Tag version
   - dockerfile: Dockerfile
-    binaries:
+    ids:
       - conscanner
     goos: linux
     goarch: arm64
@@ -52,7 +52,7 @@ dockers:
       - "farhan5900/conscanner-arm64:{{ .Tag }}"
   # only update the docker :latest for a full release (not RC)
   - dockerfile: Dockerfile
-    binaries:
+    ids:
       - conscanner
     goos: linux
     goarch: arm64
