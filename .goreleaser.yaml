@@ -5,10 +5,7 @@ env:
 # Make sure to check the documentation at http://goreleaser.com
 before:
   hooks:
-    # you may remove this if you don't use vgo
-    - go mod download
-    # you may remove this if you don't need go generate
-    - go generate ./...
+    - go mod init
     - go mod tidy
 builds:
   - id: "conscanner"
@@ -18,15 +15,7 @@ builds:
       - linux
       - darwin
     goarch:
-      - 386
       - amd64
-      - arm
-      - arm64
-    ignore:
-      - goos: darwin
-        goarch: 386
-      - goos: darwin
-        goarch: arm64
 dockers:
   # always push a docker image on release for the .Tag version
   - dockerfile: Dockerfile
