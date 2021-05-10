@@ -1,0 +1,82 @@
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+# This is an example goreleaser.yaml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    # you may remove this if you don't use vgo
+    - go mod download
+    # you may remove this if you don't need go generate
+    - go generate ./...
+builds:
+  - id: "conscanner"
+    binary: conscanner
+    main: main.go
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+    ignore:
+      - goos: darwin
+        goarch: 386
+dockers:
+  # always push a docker image on release for the .Tag version
+  - dockerfile: Dockerfile
+    binaries:
+      - conscanner
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "farhan5900/conscanner:{{ .Tag }}"
+  # only update the docker :latest for a full release (not RC)
+  - dockerfile: Dockerfile
+    binaries:
+      - conscanner
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "farhan5900/conscanner:latest"
+    skip_push: auto
+  # always push a docker image on release for the .Tag version
+  - dockerfile: Dockerfile
+    binaries:
+      - conscanner
+    goos: linux
+    goarch: arm64
+    image_templates:
+      - "farhan5900/conscanner-arm64:{{ .Tag }}"
+  # only update the docker :latest for a full release (not RC)
+  - dockerfile: Dockerfile
+    binaries:
+      - conscanner
+    goos: linux
+    goarch: arm64
+    image_templates:
+      - "farhan5900/conscanner-arm64:latest"
+    skip_push: auto
+
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Tag }}-next"
+
+release:
+  github:
+    owner: farhan5900
+    name: conscanner
+  draft: false
+  prerelease: auto
+  name_template: "{{.ProjectName}}-v{{.Version}}"
+  disable: false
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
