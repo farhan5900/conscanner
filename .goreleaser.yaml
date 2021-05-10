@@ -5,8 +5,8 @@ env:
 # Make sure to check the documentation at http://goreleaser.com
 before:
   hooks:
-    - go mod init github.com/farhan5900/conscanner
-    - go mod tidy
+    - go mod download
+    - go generate ./...
 builds:
   - id: "conscanner"
     binary: conscanner
