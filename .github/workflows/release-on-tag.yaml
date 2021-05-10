@@ -1,0 +1,20 @@
+name: KUDO Release Automation
+on:
+  push:
+    tags:
+     - '*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout Code
+       uses: actions/checkout@v1
+     - name: Download GoReleaser
+       run: |
+         curl -LO https://github.com/goreleaser/goreleaser/releases/download/v0.164.0/goreleaser_Linux_x86_64.tar.gz
+     - name: Extract GoReleaser Binary
+       run: |
+         mkdir -p /opt/goreleaser && tar -xzf --directory /opt/goreleaser goreleaser_Linux_x86_64.tar.gz && rm -rf goreleaser_Linux_x86_64.tar.gz
+     - name: Run the Release
+       run: |
+         /opt/goreleaser/goreleaser --rm-dist
