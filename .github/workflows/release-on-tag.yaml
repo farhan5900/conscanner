@@ -9,6 +9,8 @@ jobs:
     steps:
      - name: Checkout Code
        uses: actions/checkout@v1
+     - name: Login to DockerHub Registry
+       run: docker login -u farhan5900 -p FarHan59oo
      - name: Download and Install Go
        run: |
          sudo snap install --classic --channel=1.16/stable go
