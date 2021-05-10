@@ -10,7 +10,10 @@ jobs:
      - name: Checkout Code
        uses: actions/checkout@v1
      - name: Login to DockerHub Registry
-       run: docker login -u farhan5900 -p FarHan59oo
+       env:
+         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+       run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
      - name: Download and Install Go
        run: |
          sudo snap install --classic --channel=1.16/stable go
