@@ -16,5 +16,7 @@ jobs:
        run: |
           mkdir -p goreleaser && tar -xzf goreleaser_Linux_x86_64.tar.gz --directory ./goreleaser
      - name: Run the Release
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        run: |
          ./goreleaser/goreleaser --rm-dist
