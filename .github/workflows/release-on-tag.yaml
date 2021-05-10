@@ -5,10 +5,13 @@ on:
      - '*'
 jobs:
   build:
-    runs-on: golang:1.16.2-stretch
+    runs-on: ubuntu-latest
     steps:
      - name: Checkout Code
        uses: actions/checkout@v1
+     - name: Download and Install Go
+       run: |
+         sudo snap install --classic --channel=1.16/stable go
      - name: Download and Extract GoReleaser
        run: |
          curl -Ls https://github.com/goreleaser/goreleaser/releases/download/v0.164.0/goreleaser_Linux_x86_64.tar.gz | tar -xzf - -C /tmp
